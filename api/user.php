@@ -20,26 +20,33 @@
 
     $username = trim($data->username);
     $password = trim($data->password);
+    // echo (isset($username));
+    if(empty($username) || empty($password)) {
+      $returnData = msg(0, 422, 'Por favor, preencha todos os campos!');
+    } else {
+      try {
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        if($stmt->rowCount()) {
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          // Caso seja o pass esteja em formato de hash
+            // $checkPass = password_verify($password, $row['password']);
+          $checkPass = $row['password'] === $password;
+          if($checkPass) {
+            $returnData = [
+            "success" => 1,
+            "message" => 'Logado com sucesso!',
+            ];
+          }else {
+            $returnData = msg(0, 422, 'Senha inválida!');
 
-    if(empty($username) || empty($password)) $returnData = msg(0, 422, 'Por favor, preencha todos os campos!');
-
-    try {
-      $stmt->bindValue(':username', $username, PDO::PARAM_STR);
-      $stmt->execute();
-      if($stmt->rowCount()) {
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        // Caso seja o pass esteja em formato de hash
-          // $checkPass = password_verify($password, $row['password']);
-        $checkPass = $row['password'] === $password;
-        if($checkPass) $returnData = [
-          "success" => 1,
-          "message" => 'Logado com sucesso!',
-        ];
-      }else {
-        $returnData = msg(0, 422, 'Senha inválida!');
+          }
+        }else {
+          $returnData = msg(0, 422, 'Usuário inválido!');
+        }
+      } catch (\Throwable $error) {
+        $returnData = msg(0, 500, $error->getMessage());
       }
-    } catch (\Throwable $error) {
-      $returnData = msg(0, 500, $error->getMessage());
     }
 
 

@@ -13,6 +13,14 @@
   $returnData = [];
 
   // return print_r(json_encode($data));
+
+  function msg ($success, $status, $message, $extra = []) {
+	return array_merge([
+		'success' => $success,
+		'status' => $status,
+		'message' => $message
+	], $extra);
+}
   
   if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fetchUser = "SELECT * FROM economapas.users WHERE userName = :username";
@@ -53,7 +61,7 @@
 
   }else {
     echo 'vesh';
-    // $returnData = msg(0, 405, 'Inválid Method');
+    $returnData = msg(0, 405, 'Inválid Method');
   }
 
   echo json_encode($returnData);

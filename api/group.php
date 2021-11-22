@@ -1,17 +1,17 @@
 <?php
-  // require_once('../config/head.php');
-  // require_once(__DIR__.'/classes/Database.php');
-  // header('Access-Control-Allow-Headers: access');
-  // header('Access-Control-Allow-Methods: GET, POST, UPDATE');
-  // header('Content-Type: application/json; charset=UTF-8');
-  // header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
-  // header('Access-Control-Allow-Origin: *');
+  require_once('../config/head.php');
+  require_once(__DIR__.'/classes/Database.php');
+  header('Access-Control-Allow-Headers: access');
+  header('Access-Control-Allow-Methods: GET, POST, UPDATE');
+  header('Content-Type: application/json; charset=UTF-8');
+  header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+  header('Access-Control-Allow-Origin: *');
   
-  // $dbConnection = new Database();
-  // $conn = $dbConnection->dbConnection();
-  // $data = json_decode(file_get_contents("php://input"));
-  // $returnData = [];
-  // // return print_r(json_encode($data->groupName));
+  $dbConnection = new Database();
+  $conn = $dbConnection->dbConnection();
+  $data = json_decode(file_get_contents("php://input"));
+  $returnData = [];
+  // return print_r(json_encode($data->groupName));
   
   // if($_SERVER['REQUEST_METHOD'] === 'POST') {
   //   // Verificando se os dados estão sendo enviados
@@ -105,9 +105,9 @@
   //   $returnData = msg(0, 405, 'Inválid Method');
   // }
 
-  // echo json_encode($returnData);
+  echo json_encode($returnData);
 
-echo(json_encode('salve'));
+
   // {
 //     "groupName": "",
 //     "userId": "1",

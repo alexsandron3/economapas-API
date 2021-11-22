@@ -1,4 +1,8 @@
 CREATE DATABASE economapas;
+
+INSERT INTO users (userName, password) VALUES ('joao', 1234)
+INSERT INTO users (userName, password) VALUES ('maria', 5678)
+
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     userName VARCHAR(20),

@@ -13,6 +13,15 @@
   $returnData = [];
 
   // return print_r(json_encode($data));
+
+  function msg ($success, $status, $message, $extra = []) {
+	return array_merge([
+		'success' => $success,
+		'status' => $status,
+		'message' => $message
+	], $extra);
+}
+
   
   if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fetchUser = "SELECT * FROM economapas.users WHERE userName = :username";

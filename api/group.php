@@ -13,6 +13,15 @@
   $returnData = [];
   // return print_r(json_encode($data->groupName));
   
+  function msg ($success, $status, $message, $extra = []) {
+    return array_merge([
+      'success' => $success,
+      'status' => $status,
+      'message' => $message
+    ], $extra);
+  }
+
+
   if($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificando se os dados estão sendo enviados
     if(!isset($data->groupName) || 

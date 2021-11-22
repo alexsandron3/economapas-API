@@ -109,7 +109,26 @@
     }
 
   }elseif($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-
+    $deleteGroup = "DELETE FROM economapas.citygroup WHERE id=:id";
+    $stmt = $conn->prepare($deleteGroup);
+    $id = $data->id;
+    try {
+      $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+      $stmt->execute();
+      if($stmt->rowCount()) {
+        $returnData = [
+          "success" => 1,
+          "message" => 'Grupo deletado com sucesso!',
+        ];
+      }else{
+        $returnData = [
+          "success" => 0,
+          "message" => 'Grupo não foi deletado, tente novamente!',
+        ];
+      }
+    } catch (\Throwable $error) {
+      $returnData = msg(0,500,$error->getMessage());
+    }
   }else {
     $returnData = msg(0, 405, 'Inválid Method');
   }

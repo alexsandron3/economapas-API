@@ -71,6 +71,33 @@
   
       }
   }elseif($_SERVER['REQUEST_METHOD'] === 'UPDATE') {
+    $updateGroup = "UPDATE economapas.citygroup SET groupName=:groupName, selectedCities=:selectedCities WHERE id=:id";
+
+    $stmt = $conn->prepare($updateGroup);
+    $groupName = $data->groupName;
+    $selectedCities = json_encode($data->selectedCities);
+    $id = $data->id;
+    try {
+      //code...
+      $stmt->bindValue(':groupName', $groupName, PDO::PARAM_STR);
+      $stmt->bindValue(':selectedCities', $selectedCities, PDO::PARAM_STR);
+      $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+      $stmt->execute();
+      if($stmt->rowCount()){
+        $returnData = [
+          "success" => 1,
+          "message" => 'Grupo atualizado com sucesso!',
+        ];
+      }else{
+        $returnData = [
+          "success" => 0,
+          "message" => 'Grupo não foi atualizado, tente novamente!',
+        ];
+      }
+    } catch (\Throwable $error) {
+      $returnData = msg(0,500,$error->getMessage());
+  
+    }
 
   }elseif($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 

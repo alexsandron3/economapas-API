@@ -7,9 +7,9 @@
   // header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
   // header('Access-Control-Allow-Origin: *');
   
-  $dbConnection = new Database();
-  $conn = $dbConnection->dbConnection();
-  $data = json_decode(file_get_contents("php://input"));
+  // $dbConnection = new Database();
+  // $conn = $dbConnection->dbConnection();
+  // $data = json_decode(file_get_contents("php://input"));
   $returnData = [];
   // return print_r(json_encode($data->groupName));
   

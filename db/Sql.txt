@@ -9,10 +9,10 @@ CREATE TABLE users (
     password VARCHAR(255)
    )
 
-  CREATE TABLE cityGroup (  
+  CREATE TABLE citygroup (  
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     groupName VARCHAR(255) NOT NULL,
-    selectedCities JSON NOT NULL,
+    selectedCities LONGTEXT,
 	createdAt DATETIME,
     createdBy INT NOT NULL,
     FOREIGN KEY (createdBy) REFERENCES users(id)

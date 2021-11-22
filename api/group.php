@@ -60,7 +60,7 @@
       }
   }
   }elseif($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $fetchGroups = "SELECT * FROM economapas.cityGroup";
+    $fetchGroups = "SELECT * FROM economapas.citygroup";
     $stmt = $conn->prepare($fetchGroups);
     try {
       $stmt->execute();

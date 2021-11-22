@@ -1,4 +1,5 @@
 <?php
+echo "será";
   // require_once('../config/head.php');
   // require_once(__DIR__.'/classes/Database.php');
   // header('Access-Control-Allow-Headers: access');
@@ -10,7 +11,7 @@
   // $dbConnection = new Database();
   // $conn = $dbConnection->dbConnection();
   // $data = json_decode(file_get_contents("php://input"));
-  $returnData = [];
+  // $returnData = [];
   // return print_r(json_encode($data->groupName));
   
   // if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -105,7 +106,7 @@
   //   $returnData = msg(0, 405, 'Inválid Method');
   // }
 
-  echo json_encode($returnData);
+  // echo json_encode($returnData);
 
 
   // {

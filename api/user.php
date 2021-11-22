@@ -52,7 +52,8 @@
 
 
   }else {
-    $returnData = msg(0, 405, 'Inválid Method');
+    echo 'vesh';
+    // $returnData = msg(0, 405, 'Inválid Method');
   }
 
   echo json_encode($returnData);

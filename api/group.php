@@ -59,12 +59,13 @@
           $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
           $returnData = [
             "success" => 1,
-            "message" => 'Pesquisa realizada com sucesso!',
-            "cliente" => $row
+            "message" => 'Lista atualizada com sucesso!',
+            "grupos" => $row
           ];
-        }else {
-          $returnData = msg(0, 422, 'Passeio não encontrado!');
         }
+        // else {
+          // $returnData = msg(0, 422, 'Lista não atualizada!');
+        // }
       } catch (\Throwable $error) {
         $returnData = msg(0,500,$error->getMessage());
   

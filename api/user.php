@@ -36,6 +36,7 @@
             $returnData = [
             "success" => 1,
             "message" => 'Logado com sucesso!',
+            "userId" => $row['id'],
             ];
           }else {
             $returnData = msg(0, 422, 'Senha inválida!');

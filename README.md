@@ -1,7 +1,14 @@
 # economapas-API
  Repositório para código referente a API do desafio para empresa ECONOMAPAS
  
- Ao tentar logar o sistema irá:
-  Verificar se o login e senha estão vazios e retornar uma mensagem caso positivo.
-  Verificar se o usuário existe no banco de dados e retornar uma mensagem caso negtivo.
-  Verificar se as senhas conferem e retornar uma mensagem caso positivo ou negativo.
+ O código para o backend foi desenvolvido com PHP PDO e apenas uma biblioteca, a dotenv.
+ O código foi feito para representar respostas de API e todos as requisições são controlodas pelo método baseado no tipo de requisição recebida.
+ A estrutura para a criação do banco de dados está no arquivo dentro da pastra "db".
+
+O banco de dados está sendo hospedado pela empresa UMBLER (https://umbler.com) e os arquivos .php estão sendo hospedados pela empresa HEROKU (https://heroku.com)
+
+Para testar localmente este código desenvolvido é necessário que você altere as informações no arquivo .dotenv ou crie o mesmo com a seguinte estrutura recomendada:
+DBhost = 'seuHost'
+DBname = 'economapas'
+DBuser = 'seuUsuario'
+DBpass = 'suaSenha'

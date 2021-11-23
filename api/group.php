@@ -38,7 +38,6 @@
       $addGroup = "INSERT INTO economapas.citygroup (groupName, selectedCities, createdAt, createdBy) VALUES (:groupName, :selectedCities, NOW(), :createdBy)";
       $stmt = $conn->prepare($addGroup);
       try {
-        //code...
         $stmt->bindValue(':groupName', $groupName, PDO::PARAM_STR);
         $stmt->bindValue(':selectedCities', $selectedCities, PDO::PARAM_STR);
         $stmt->bindValue(':createdBy', $createdBy, PDO::PARAM_STR);
@@ -60,37 +59,50 @@
       }
   }
   }elseif($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $fetchGroups = "SELECT * FROM economapas.citygroup";
-    $stmt = $conn->prepare($fetchGroups);
-    try {
-      $stmt->execute();
-      if($stmt->rowCount()){
-          $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-          $returnData = [
-            "success" => 1,
-            "message" => 'Lista atualizada com sucesso!',
-            "grupos" => $row
-          ];
+    $fetchGroups = "SELECT * FROM economapas.citygroup WHERE createdBy=:userId";    
+    $stmt = $conn->prepare($fetchGroups); 
+    if(!isset($_GET['userId'])) {
+      
+      $returnData = msg(0, 422, 'Você não está logado!');
+
+    }else{
+
+      $userId = $_GET['userId'];
+      try {
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_STR);
+
+        $stmt->execute();
+        if($stmt->rowCount()){
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $returnData = [
+              "success" => 1,
+              "message" => 'Lista atualizada com sucesso!',
+              "grupos" => $row
+            ];
+          }
+          // else {
+            // $returnData = msg(0, 422, 'Lista não atualizada!');
+          // }
+        } catch (\Throwable $error) {
+          $returnData = msg(0,500,$error->getMessage());
+    
         }
-        // else {
-          // $returnData = msg(0, 422, 'Lista não atualizada!');
-        // }
-      } catch (\Throwable $error) {
-        $returnData = msg(0,500,$error->getMessage());
-  
-      }
+    }
   }elseif($_SERVER['REQUEST_METHOD'] === 'UPDATE') {
-    $updateGroup = "UPDATE economapas.citygroup SET groupName=:groupName, selectedCities=:selectedCities WHERE id=:id";
+    $updateGroup = "UPDATE economapas.citygroup SET groupName=:groupName, selectedCities=:selectedCities WHERE id=:id AND createdBy=:userId";
 
     $stmt = $conn->prepare($updateGroup);
     $groupName = $data->groupName;
     $selectedCities = json_encode($data->selectedCities);
     $id = $data->id;
+    $userId = $data->userId;
     try {
       //code...
       $stmt->bindValue(':groupName', $groupName, PDO::PARAM_STR);
       $stmt->bindValue(':selectedCities', $selectedCities, PDO::PARAM_STR);
       $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+      $stmt->bindValue(':userId', $userId, PDO::PARAM_STR);
+
       $stmt->execute();
       if($stmt->rowCount()){
         $returnData = [
@@ -109,11 +121,13 @@
     }
 
   }elseif($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    $deleteGroup = "DELETE FROM economapas.citygroup WHERE id=:id";
+    $deleteGroup = "DELETE FROM economapas.citygroup WHERE id=:id AND createdBy=:userId";
     $stmt = $conn->prepare($deleteGroup);
-    $id = $data;
+    $id = $data->id;
+    $userId = $data->userId;
     try {
       $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+      $stmt->bindValue(':userId', $userId, PDO::PARAM_STR);
       $stmt->execute();
       if($stmt->rowCount()) {
         $returnData = [

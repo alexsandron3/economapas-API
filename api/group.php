@@ -11,7 +11,7 @@
   $conn = $dbConnection->dbConnection();
   $data = json_decode(file_get_contents("php://input"));
   $returnData = [];
-  // return print_r(json_encode($data->groupName));
+  // return print_r(json_encode($data));
   
   function msg ($success, $status, $message, $extra = []) {
     return array_merge([
@@ -111,7 +111,7 @@
   }elseif($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $deleteGroup = "DELETE FROM economapas.citygroup WHERE id=:id";
     $stmt = $conn->prepare($deleteGroup);
-    $id = $data->id;
+    $id = $data;
     try {
       $stmt->bindValue(':id', $id, PDO::PARAM_STR);
       $stmt->execute();

@@ -2,7 +2,6 @@
 
 Você pode visualizar o código para o FRONT-END neste repositório: https://github.com/alexsandron3/economapas-front
 
- Repositório para código referente a API do desafio para empresa ECONOMAPAS
  
  O código para o backend foi desenvolvido com PHP PDO e apenas uma biblioteca, a dotenv.
  O código foi feito para representar respostas de API e todos as requisições são controlodas pelo método baseado no tipo de requisição recebida.
